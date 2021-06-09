@@ -76,6 +76,18 @@ export const deleteVeiculo = async (req, res) => {
   }
 }
 
-export async function getVeiculoById(id) {
-
+export const getVeiculoById = async (req, res) => {
+  const id = req.params.id
+  try {
+    const veiculo = await VeiculoModel.findById(id)
+    res.json({
+      status: STATUS.success,
+      veiculo
+    })
+  } catch (err) {
+    res.json({
+      status: STATUS.error,
+      msg: err.message
+    })
+  }
 }
