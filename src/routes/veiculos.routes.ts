@@ -5,11 +5,11 @@ import {
   updateVeiculo,
   deleteVeiculo,
   getVeiculoById,
-} from '../controllers/veiculo.controller'
+} from '../controllers/veiculos.controller'
 
 const router = Router()
 
-// veiculos endpoits 
+// veiculos endpoints 
 router.post('/', createVeiculo)
 router.get('/', listVeiculos)
 router.get('/:id', getVeiculoById)
