@@ -19,12 +19,44 @@ export const createVeiculo = async (req, res) => {
   }
 }
 
-export async function listVeiculos() {
+export const listVeiculos = async (req, res) => {
+  try {
+    const allVeiculos = await VeiculoModel.find({})
 
+    res.json({
+      status: STATUS.success,
+      qtd: allVeiculos.length,
+      veiculos: allVeiculos
+    })
+  } catch (err) {
+    res.json({
+      status: STATUS.error,
+      msg: err.message
+    })
+  }
 }
 
-export async function updateVeiculo(id) {
+export const updateVeiculo = async (req, res) => {
+  const id = req.params.id
+  let data = req.body
 
+  try {
+    const updatedVeiculo = await VeiculoModel
+      .findOneAndUpdate(
+        { _id: id },
+        { ...data },
+        { new: true } // returns the modified object
+      )
+    res.json({
+      status: STATUS.success,
+      updatedVeiculo
+    })
+  } catch (err) {
+    res.json({
+      status: STATUS.error,
+      msg: err.message
+    })
+  }
 }
 
 export async function deleteVeiculo(id) {
